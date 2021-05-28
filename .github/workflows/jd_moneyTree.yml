@@ -30,7 +30,8 @@ jobs:
           key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('package-lock.json') }} # 使用 package-lock.json 的 Hash 作为缓存的 key。也可以使用 package.json 代替
       - name: npm install
         run: |
-          npm install crypto-js http-server tough-cookie got --save
+          npm install crypto-js http-server tough-cookie 
+          got --save
       - name: '运行 「京东」摇钱树'
         run: |
           node jd_moneyTree.js
