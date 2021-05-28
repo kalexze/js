@@ -8,7 +8,7 @@ on:
   schedule:
     - cron: '3 * * * *'
   repository_dispatch:
-    types: adolf_pk
+    types: jd_jin_tie
 jobs:
   build:
 
