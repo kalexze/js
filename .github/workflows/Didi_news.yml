@@ -35,8 +35,8 @@ jobs:
         run: |
           node DiDi_new.js
         env:
-          TokenValue: zVip0zLvUWVWKMmsc2SaGIdByvYsyB1V2385ERcxKKEkzjuuwkAMheG9nNqK
-          CityValue: 17
+          TokenValue = 'zVip0zLvUWVWKMmsc2SaGIdByvYsyB1V2385ERcxKKEkzjuuwkAMheG9nNqK'
+          CityValue = '17'
           JD_COOKIE: ${{ secrets.JD_COOKIE }}
           PUSH_PLUS_TOKEN: ${{ secrets.PUSH_PLUS_TOKEN }}
           PUSH_PLUS_USER: ${{ secrets.PUSH_PLUS_USER }}
