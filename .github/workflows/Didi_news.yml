@@ -35,11 +35,8 @@ jobs:
         run: |
           node DiDi_new.js
         env:
-
-DIDI: ${{ secrets.DIDI }}
-
-DIDI_CITY: ${{ secrets.DIDI_CITY }}
-
+          DIDI: ${{ secrets.DIDI }}
+          DIDI_CITY: ${{ secrets.DIDI_CITY }}
           JD_COOKIE: ${{ secrets.JD_COOKIE }}
           PUSH_PLUS_TOKEN: ${{ secrets.PUSH_PLUS_TOKEN }}
           PUSH_PLUS_USER: ${{ secrets.PUSH_PLUS_USER }}
