@@ -29,13 +29,10 @@ let jdNotify = true;//是否关闭通知，false打开通知推送，true关闭�
 let cookiesArr = [], cookie = '', message;
 let helpAuthor = true;
 const randomCount = $.isNode() ? 0 : 5;
-let cash_exchange = true;//是否消耗2元红包兑换200京豆，默认是
+let cash_exchange = false;//是否消耗2元红包兑换200京豆，默认否
 const inviteCodes = [
-  `eU9YLLXMAYRgmReknwxG@eU9YCbfbHp5HkSepqRZx@eU9YOK7UAKtBuAiOihdW@eU9YCZvgLolCuT-OuCBu@cENiLq77Z_0n9w@eU9YK57pML9vly-8uSFB@eU9YaL_mNaly9zrRmicU1w@eU9YO63FEaZjrymnuiJy`,
-  `eU9YLLXMAYRgmReknwxG@eU9YCbfbHp5HkSepqRZx@eU9YOK7UAKtBuAiOihdW@eU9YCZvgLolCuT-OuCBu@cENiLq77Z_0n9w@eU9YK57pML9vly-8uSFB@eU9YaL_mNaly9zrRmicU1w@eU9YO63FEaZjrymnuiJy`,
-  `eU9YLLXMAYRgmReknwxG@eU9YCbfbHp5HkSepqRZx@eU9YOK7UAKtBuAiOihdW@eU9YCZvgLolCuT-OuCBu@cENiLq77Z_0n9w@eU9YK57pML9vly-8uSFB@eU9YaL_mNaly9zrRmicU1w@eU9YO63FEaZjrymnuiJy`,
-  `eU9YLLXMAYRgmReknwxG@eU9YCbfbHp5HkSepqRZx@eU9YOK7UAKtBuAiOihdW@eU9YCZvgLolCuT-OuCBu@cENiLq77Z_0n9w@eU9YK57pML9vly-8uSFB@eU9YaL_mNaly9zrRmicU1w@eU9YO63FEaZjrymnuiJy`,
-  `eU9YLLXMAYRgmReknwxG@eU9YCbfbHp5HkSepqRZx@eU9YOK7UAKtBuAiOihdW@eU9YCZvgLolCuT-OuCBu@cENiLq77Z_0n9w@eU9YK57pML9vly-8uSFB@eU9YaL_mNaly9zrRmicU1w@eU9YO63FEaZjrymnuiJy`
+  `eU9YLLXMAYRgmReknwxG@eU9YCZvgLolCuT-OuCBu@eU9YEIjVOIJTsRm1gTRu@cENiLq77Z_0n9w@eU9YCbfbHp5HkSepqRZx`,
+  `eU9YLLXMAYRgmReknwxG@eU9YCZvgLolCuT-OuCBu@eU9YEIjVOIJTsRm1gTRu@cENiLq77Z_0n9w@eU9YCbfbHp5HkSepqRZx`
 ]
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
@@ -54,6 +51,7 @@ let allMessage = '';
   }
   await requireConfig()
   await getAuthorShareCode();
+  await getAuthorShareCode2();
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
@@ -99,8 +97,8 @@ async function jdCash() {
     for (let item of ["-1", "0", "1", "2", "3"]) {
       $.canLoop = true;
       if ($.canLoop) {
-        for (let i = 0; i < 4; i++) {
-          await exchange2(item);//兑换200京豆(2元红包换200京豆，一周四次。)
+        for (let i = 0; i < 5; i++) {
+          await exchange2(item);//兑换200京豆(2元红包换200京豆，一周5次。)
         }
         if (!$.canLoop) {
           console.log(`已找到符合的兑换条件，跳出\n`);
@@ -455,7 +453,7 @@ function taskUrl(functionId, body = {}) {
   }
 }
 
-function getAuthorShareCode(url = "https://gitee.com/shylocks/updateTeam/raw/main/jd_cash.json") {
+function getAuthorShareCode(url = "https://ghproxy.com/https://raw.githubusercontent.com/ElsaKing/updateTeam/main/shareCodes/jd_cash.json") {
   return new Promise(resolve => {
     $.get({url, headers:{
         "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/87.0.4280.88"
@@ -465,6 +463,28 @@ function getAuthorShareCode(url = "https://gitee.com/shylocks/updateTeam/raw/mai
         if (err) {
         } else {
           $.authorCode = JSON.parse(data)
+        }
+      } catch (e) {
+        $.logErr(e, resp)
+      } finally {
+        resolve();
+      }
+    })
+  })
+}
+function getAuthorShareCode2(url = "https://ghproxy.com/https://raw.githubusercontent.com/ElsaKing/updateTeam/main/shareCodes/jd_cash.json") {
+  return new Promise(resolve => {
+    $.get({url, headers:{
+        "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/87.0.4280.88"
+      }, timeout: 200000,}, async (err, resp, data) => {
+      $.authorCode2 = [];
+      try {
+        if (err) {
+        } else {
+          $.authorCode2 = JSON.parse(data)
+          if ($.authorCode2 && $.authorCode2.length) {
+            $.authorCode.push(...$.authorCode2);
+          }
         }
       } catch (e) {
         $.logErr(e, resp)
