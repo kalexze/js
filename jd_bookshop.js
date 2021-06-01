@@ -29,7 +29,7 @@ let ADD_CART = false
 ADD_CART = $.isNode() ? (process.env.PURCHASE_SHOPS ? process.env.PURCHASE_SHOPS : ADD_CART) : ($.getdata("ADD_CART") ? $.getdata("ADD_CART") : ADD_CART);
 // 加入购物车开关，与东东小窝共享
 
-let inviteCodes = [	
+let inviteCodes = [
   'c68bf26e0a9e4e73b610b9902448bea6@61dc4400fcba4b38893ea88dcf7ee6a4@ed769bec4e514a34a026e22b5deb1937@c993d26b0dd94ca0a68b910fbf281e5d',	
   'c68bf26e0a9e4e73b610b9902448bea6@61dc4400fcba4b38893ea88dcf7ee6a4@ed769bec4e514a34a026e22b5deb1937@c993d26b0dd94ca0a68b910fbf281e5d'	
 ]
@@ -281,6 +281,7 @@ function getActContent(info = false, shareUuid = '') {
               if (!$.userInfo.bookStore) {
                 $.exit = true
                 console.log(`京东账号${$.index}尚未开启口袋书店，请手动开启`)
+                console.log('\n提示：从五月份开始，需要手动进入一下活动页面。不然即使是开启了这个活动。跑脚本也提示未开启活动\n')
                 return
               }
               $.actorUuid = $.userInfo.actorUuid
