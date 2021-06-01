@@ -1,14 +1,14 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: 「活动」母婴跳一跳
+name: 「活动」freshgoods
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: '5 0-23/6 * * *'
+    - cron: '8 0-23/12 * * *'
   repository_dispatch:
-    types: z_mother_jump
+    types: jay_freshgoods
 jobs:
   build:
 
@@ -31,9 +31,9 @@ jobs:
       - name: npm install
         run: |
           npm install
-      - name: '运行 「活动」母婴跳一跳'
+      - name: '运行 「活动」freshgoods'
         run: |
-          node z_mother_jump.js
+          node jay_freshgoods.js
         env:
           JD_COOKIE: ${{ secrets.JD_COOKIE }}
           PUSH_PLUS_TOKEN: ${{ secrets.PUSH_PLUS_TOKEN }}
@@ -44,8 +44,10 @@ jobs:
           JD_DEBUG: ${{ secrets.JD_DEBUG }}
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
           BARK_PUSH: ${{ secrets.BARK_PUSH }}
+          BARK_SOUND: ${{ secrets.BARK_SOUND }}JD_US
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
           TG_USER_ID: ${{ secrets.TG_USER_ID }}
-          BARK_SOUND: ${{ secrets.BARK_SOUND }}
           DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
           DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
+          ADOLF_ADDSKU: ${{ secrets.ADOLF_ADDSKU }}
+          
